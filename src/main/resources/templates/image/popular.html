@@ -1,5 +1,10 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 
-<!--<%@ include file="../layout/header.jsp"%>-->
+<head th:replace="/layout/head.html :: fragment-head"/>
+
+<header th:replace="/layout/header.html :: fragment-header"/>
+
 
 <!--인기 게시글-->
 <main class="popular">
@@ -40,6 +45,6 @@
 
 	</div>
 </main>
+<footer th:replace="/layout/footer.html :: fragment-footer"/>
 
-<%@ include file="../layout/footer.jsp"%>
 

@@ -1,9 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-	
-	<%@ include file="../layout/header.jsp" %>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 
-    <!--사진 업로드페이지 중앙배치-->
+<head th:replace="/layout/head.html :: fragment-head"/>
+
+<header th:replace="/layout/header.html :: fragment-header"/>
+
+<!--사진 업로드페이지 중앙배치-->
         <main class="uploadContainer">
            <!--사진업로드 박스-->
             <section class="upload">
@@ -38,5 +40,5 @@
         </main>
         <br/><br/>
 	
+    <footer th:replace="/layout/footer.html :: fragment-footer"/>
 	<script src="/js/upload.js" ></script>
-    <%@ include file="../layout/footer.jsp" %>

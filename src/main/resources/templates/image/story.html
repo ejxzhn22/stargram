@@ -1,6 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ include file="../layout/header.jsp"%>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="/layout/head.html :: fragment-head"/>
+
+<header th:replace="/layout/header.html :: fragment-header"/>
 
 <main class="main">
 	<section class="container">
@@ -37,7 +40,7 @@
 
 					<div id="storyCommentList-1">
 
-						<div class="sl__item__contents__comment" id="storyCommentItem-1"">
+						<div class="sl__item__contents__comment" id="storyCommentItem-1">
 							<p>
 								<b>Lovely :</b> 부럽습니다.
 							</p>
@@ -60,6 +63,7 @@
 
 		</article>
 	</section>
+	<footer th:replace="/layout/footer.html :: fragment-footer"/>
 </main>
 <script src="/js/story.js"></script>
 </body>

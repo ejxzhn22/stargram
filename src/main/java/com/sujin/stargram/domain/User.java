@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 @Builder
@@ -20,7 +19,7 @@ public class User {
     private Long id;
 
     @Column(length = 20, unique = true)
-    private String userId;  // 아이디
+    private String username;  // 아이디
     @Column(nullable = false)
     private String password;  // 비밀번호
     @Column(nullable = false)
