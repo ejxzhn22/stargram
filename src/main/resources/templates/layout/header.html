@@ -1,15 +1,13 @@
 
-<!--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
--->
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <header  th:fragment="fragment-header" class="header">
 	<div class="container">
 		<a href="/" class="logo">
-			<img src="/images/logo.jpg" alt="">
+			<img src="/images/logo.png" alt="">
 		</a>
+<!--		<div sec:authentication="principal"></div>-->
 		<nav class="navi">
 			<ul class="navi-list">
 				<li class="navi-item"><a href="/">

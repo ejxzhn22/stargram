@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 // 그래서 PrincipalDetailsService에  loadUserByUsername 메소드가 실행됨
 // 패스워드는 알아서 체킹해주기 때문에 신경쓸 필요 없음
 // 리턴타입은 UserDetails => 리턴이 잘되면 UserDetails타입을 세션으로 자동으로 만들어줌
+// 세션안에 SecurityContextHolder 안에 Authentication 안에 PrincipalDetails 타입의 user
+// 너무 복잡 => 어노테이션 있음 => @AuthenticationPrincipal : Authentication으로 바로 접근
 @RequiredArgsConstructor
 @Service
 public class PrincipalDetailsService implements UserDetailsService {
