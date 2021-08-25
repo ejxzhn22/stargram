@@ -9,7 +9,7 @@ public class UserApiController {
 
     @PutMapping("/api/user/{id}")
     public String update(UserUpdateDto userUpdateDto) {
-        System.out.println(userUpdateDto);
+        System.out.println
+    }(userUpdateDto);
         return "ok";
-    }
 }
