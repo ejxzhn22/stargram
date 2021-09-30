@@ -44,7 +44,7 @@ spring:
       password: 1234
 
 file:
-  path: C:/boot/upload/
+  path: C:/project/upload/
 
 logging:
   level:

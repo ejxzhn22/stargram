@@ -1,5 +1,6 @@
 package com.sujin.stargram.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Builder
 @NoArgsConstructor
@@ -34,6 +36,14 @@ public class User {
 
     private String profileImageUrl;    //프로필 사진
     private String role;    // 권한
+
+    // 나는 연관관계 주인 아님, 테이블에 컬럼 안만듦
+    // user select할 때 해당 userId로 등록된 이미지를 같이 가져왕
+    // OnetoMany는 fetchType 기본  LAZY  - getImages() 할때 가져옴
+    // EAGER = USER SELECT할 떄 같이 가져옴
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"user"})
+    private List<Image> images;
 
     private LocalDateTime createDate;
 

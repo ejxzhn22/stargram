@@ -28,10 +28,11 @@
 		<!--유저정보 및 사진등록 구독하기-->
 		<div class="profile-right">
 			<div class="name-group">
-				<h2>TherePrograming</h2>
+				<h2 th:text="${dto.user.name}"></h2>
 
-				<button class="cta" onclick="location.href='/image/upload'">사진등록</button>
-				<button class="cta" onclick="toggleSubscribe(this)">구독하기</button>
+				<button th:if="${dto.pageOwner}" class="cta" onclick="location.href='/image/upload'">사진등록</button>
+				<button th:if="!${dto.pageOwner} and ${dto.subscribeState}" class="cta blue" th:onclick="|toggleSubscribe(${dto.user.id},this)|" >구독취소</button>
+				<button th:if="!${dto.pageOwner} and !${dto.subscribeState}" class="cta" th:onclick="|toggleSubscribe(${dto.user.id},this)|">구독하기</button>
 				<button class="modi" onclick="popup('.modal-info')">
 					<i class="fas fa-cog"></i>
 				</button>
@@ -39,15 +40,15 @@
 
 			<div class="subscribe">
 				<ul>
-					<li><a href=""> 게시물<span>3</span>
+					<li><a href=""> 게시물<span th:text="${dto.user.images.size()}"></span>
 					</a></li>
-					<li><a href="javascript:subscribeInfoModalOpen();"> 구독정보<span>2</span>
+					<li><a th:href="|javascript:subscribeInfoModalOpen(${dto.user.id});|"> 구독정보<span th:text="${dto.subscribeCount}"></span>
 					</a></li>
 				</ul>
 			</div>
 			<div class="state">
-				<h4>자기 소개입니다.</h4>
-				<h4>https://github.com/codingspecialist</h4>
+				<h4 th:text="${dto.user.bio}"></h4>
+				<h4 th:text="${dto.user.website}"></h4>
 			</div>
 		</div>
 		<!--유저정보 및 사진등록 구독하기-->
@@ -67,26 +68,8 @@
 				<!--아이템들-->
 
 
-				<div class="img-box">
-					<a href=""> <img src="/images/home.jpg" />
-					</a>
-					<div class="comment">
-						<a href="#" class=""> <i class="fas fa-heart"></i><span>0</span>
-						</a>
-					</div>
-				</div>
-
-				<div class="img-box">
-					<a href=""> <img src="/images/home.jpg" />
-					</a>
-					<div class="comment">
-						<a href="#" class=""> <i class="fas fa-heart"></i><span>0</span>
-						</a>
-					</div>
-				</div>
-
-				<div class="img-box">
-					<a href=""> <img src="/images/home.jpg" />
+				<div class="img-box" th:each="image : ${dto.user.images}">
+					<a href=""> <img th:src="|/upload/${image.postImageUrl}|"/>
 					</a>
 					<div class="comment">
 						<a href="#" class=""> <i class="fas fa-heart"></i><span>0</span>
@@ -132,30 +115,6 @@
 
 		<div class="subscribe-list" id="subscribeModalList">
 
-			<div class="subscribe__item" id="subscribeModalItem-1">
-				<div class="subscribe__img">
-					<img src="#" onerror="this.src='/images/person.jpeg'"/>
-				</div>
-				<div class="subscribe__text">
-					<h2>love</h2>
-				</div>
-				<div class="subscribe__btn">
-					<button class="cta blue" onclick="toggleSubscribeModal(this)">구독취소</button>
-				</div>
-			</div>
-
-
-			<div class="subscribe__item" id="subscribeModalItem-2">
-				<div class="subscribe__img">
-					<img src="#" onerror="this.src='/images/person.jpeg'"/>
-				</div>
-				<div class="subscribe__text">
-					<h2>ssar</h2>
-				</div>
-				<div class="subscribe__btn">
-					<button class="cta blue" onclick="toggleSubscribeModal(this)">구독취소</button>
-				</div>
-			</div>
 		</div>
 	</div>
 
