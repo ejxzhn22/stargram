@@ -42,6 +42,10 @@ public class Image {
     private int likeCount;
 
     //이미지 댓글
+    @OrderBy("id desc")
+    @JsonIgnoreProperties({"image"})
+    @OneToMany(mappedBy = "image")
+    private List<Comment> comments;
 
     private LocalDateTime createDate;
 

@@ -1,4 +1,4 @@
-package com.sujin.stargram.controller;
+package com.sujin.stargram.controller.api;
 
 import com.sujin.stargram.Service.ImageService;
 import com.sujin.stargram.Service.LikesService;
