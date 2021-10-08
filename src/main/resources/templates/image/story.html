@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="/layout/head.html :: fragment-head"/>
+<head th:replace="/layout/head.html :: fragment-head" ></head>
 
-<header th:replace="/layout/header.html :: fragment-header"/>
+<header th:replace="/layout/header.html :: fragment-header"></header>
 
 <main class="main">
 	<input type="hidden" id="principalId" th:value="${#authentication.principal.user.id}"/>
@@ -16,7 +16,7 @@
 
 		</article>
 	</section>
-	<footer th:replace="/layout/footer.html :: fragment-footer"/>
+	<footer th:replace="/layout/footer.html :: fragment-footer"></footer>
 </main>
 <script src="/js/story.js"></script>
 </body>
