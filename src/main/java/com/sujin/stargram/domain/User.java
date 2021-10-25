@@ -20,7 +20,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 번호 증가 전략이 데이터베이스를 따라감
     private Long id;
 
-    @Column(length = 20, unique = true)
+    @Column(length = 100, unique = true)
     private String username;  // 아이디
     @Column(nullable = false)
     private String password;  // 비밀번호

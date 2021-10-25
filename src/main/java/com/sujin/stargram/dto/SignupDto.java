@@ -9,7 +9,7 @@ import javax.validation.constraints.*;
 public class SignupDto {
     @Size(max = 20)
     @NotBlank
-    @Pattern(regexp="[a-zA-Z1-9]{2,12}", message = "아이디는 영어 또는 숫자로 2~12자리 이내로 입력해주세요.")
+    @Pattern(regexp="[a-zA-Z0-9]{2,12}", message = "아이디는 영어 또는 숫자로 2~12자리 이내로 입력해주세요.")
     private String username;
 
     @NotBlank

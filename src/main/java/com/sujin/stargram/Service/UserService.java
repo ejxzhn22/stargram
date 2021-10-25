@@ -77,6 +77,17 @@ public class UserService {
         return dto;
     }
 
+
+    @Transactional(readOnly = true)
+    public User findUser(String username) {
+        User user = userRepository.findByUser(username).orElseGet(()->{
+            return new User();
+        });
+
+        return user;
+    }
+
+
     //회원가입
     @Transactional
    public User join(User user) {
@@ -112,4 +123,6 @@ public class UserService {
 
         return userEntity;
     }// 더티체킹 일어나서 업데이트가 완료됨.
+
+
 }

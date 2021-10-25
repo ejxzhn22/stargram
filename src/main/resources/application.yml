@@ -50,3 +50,6 @@ logging:
   level:
     org.hibernate.SQL: debug
     org.hibernate.type: trace
+
+tnwls:
+  key: tnwls1234
