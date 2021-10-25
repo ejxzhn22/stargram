@@ -77,15 +77,13 @@ public class UserService {
         return dto;
     }
 
-
-    @Transactional(readOnly = true)
-    public User findUser(String username) {
-        User user = userRepository.findByUser(username).orElseGet(()->{
-            return new User();
-        });
-
-        return user;
-    }
+// 카카오 로그인 토큰 방식
+//    @Transactional(readOnly = true)
+//    public User findByUsername(String username) {
+//        User user = userRepository.findByUsername(username);
+//
+//        return user;
+//    }
 
 
     //회원가입
