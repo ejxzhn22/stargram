@@ -37,6 +37,22 @@ public class User {
     private String profileImageUrl;    //프로필 사진
     private String role;    // 권한
 
+    private String provider;
+    private String providerId;
+
+    @Builder
+    public User(String username, String password, String email, String name, String role, String provider, String providerId, LocalDateTime createDate) {
+
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.name = name;
+        this.role = role;
+        this.provider = provider;
+        this.providerId = providerId;
+        this.createDate = createDate;
+    }
+
     // 나는 연관관계 주인 아님, 테이블에 컬럼 안만듦
     // user select할 때 해당 userId로 등록된 이미지를 같이 가져왕
     // OnetoMany는 fetchType 기본  LAZY  - getImages() 할때 가져옴
