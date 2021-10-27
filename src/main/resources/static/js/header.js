@@ -41,8 +41,10 @@ function headerSubscribeInfoModalOpen() {
 	}).done(res=>{
 		console.log("성공", res.data);
 		res.data.forEach((u)=>{
-			let item = getHeaderSubscribeModalItem(u);
+			let item = getHeaderSubscribeModalItem(u.user);
 			$("#subscribeHeaderModalList").append(item);
+			let item2 = getHeaderSubscribeModalItem2(u);
+			$("#subscribe__btn").append(item2);
 		});
 	}).fail(error=>{
 		console.log("실패", error);
@@ -50,15 +52,34 @@ function headerSubscribeInfoModalOpen() {
 }
 
 function getHeaderSubscribeModalItem(u) {
-	let item = `<div class="subscribe-header__item" th:id="subscribeHeaderModalItem-${u.id}">
+	let item = `<div class="subscribe-header__item" id="subscribeHeaderModalItem-${u.id}">
 	<div class="subscribe__img">
 		<img src="/upload/${u.profileImageUrl}" onerror="this.src='/images/person.jpeg'"/>
 	</div>
 	<div class="subscribe__text">
-		<h2>${u.username}</h2>
+		<h2 th:text="${u.username}">${u.username}</h2>
 	</div>
-	<div class="subscribe__btn">`;
+	<div id="subscribe__btn" class="subscribe__btn">`;
 
+	// if(!u.equalUserState){ // 동일 유저가 아닐 때 버튼이 만들어 져야함
+	// 	if(u.subscribeState){ // 구독 한 상태
+	// 		item += `<button class="cta blue" onclick="toggleSubscribeHeader(${u.id},this)">구독취소</button>`;
+	//
+	// 	}else{ // 구독 안 한 상태
+	// 		item += `<button class="cta" onclick="toggleSubscribeHeader(${u.id},this)">구독하기</button>`;
+	//
+	// 	}
+	// }
+item +=`	
+</div>
+</div>`;
+
+	console.log(item);
+	return item;
+}
+
+function getHeaderSubscribeModalItem2(u) {
+	let item = ``;
 	if(!u.equalUserState){ // 동일 유저가 아닐 때 버튼이 만들어 져야함
 		if(u.subscribeState){ // 구독 한 상태
 			item += `<button class="cta blue" onclick="toggleSubscribeHeader(${u.id},this)">구독취소</button>`;
@@ -68,11 +89,7 @@ function getHeaderSubscribeModalItem(u) {
 
 		}
 	}
-item +=`	
-</div>
-</div>`;
 
-	console.log(item);
 	return item;
 }
 
