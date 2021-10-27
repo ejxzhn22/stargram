@@ -69,10 +69,10 @@
 
 
 				<div class="img-box" th:each="image : ${dto.user.images}">
-					<a href=""> <img th:src="|/upload/${image.postImageUrl}|"/>
+					<a href=""> <img th:src="|/upload/${image.postImageUrl}|" />
 					</a>
-					<div class="comment">
-						<a href="#" class=""> <i class="fas fa-heart"></i><span ></span>
+					<div class="comment" onclick="popup('.modal-imageDetail')">
+						<a href="#" class=""> <i class="fas fa-heart"></i><span th:text="${image.likeCount}"></span>
 						</a>
 					</div>
 				</div>
@@ -104,6 +104,7 @@
 
 <!--프로필사진 바꾸기 모달end-->
 
+<!-- 구독정보 모달 -->
 <div class="modal-subscribe">
 	<div class="subscribe">
 		<div class="subscribe-header">
@@ -119,7 +120,66 @@
 	</div>
 
 </div>
+
+
+<!-- 사진 게시글 상세 보기 -->
+<div class="modal-imageDetail" th:each="image : ${dto.user.images}">
+	<div class="imageDetail">
+		<div class="imageDetail-header">
+			<span>이미지 상세</span>
+			<button onclick="imageDetailModalClose()">
+				<i class="fas fa-times"></i>
+			</button>
+		</div>
+
+		<div class="imageDetail-list" >
+			<div class="story-list" id="storyList">
+			<div class="story-list__item">
+
+				<div class="sl__item__img" >
+					<img style="height: 400px; width: 730px;" th:src="|/upload/${image.postImageUrl}|" />
+				</div>
+				<div class="sl__item__contents">
+					<div class="sl__item__contents__icon">
+						<button>
+							<i th:if="${image.likeState}" class="fas fa-heart active" th:id="|storyLikeIcon-${image.id}|" th:onclick="|toggleLike(${image.id})|"></i>
+							<i th:if="!${image.likeState}" class="far fa-heart" th:id="|storyLikeIcon-${image.id}|" th:onclick="|toggleLike(${image.id})|"></i>
+						</button>
+					<span class="like"><b th:id="|storyLikeCount-${image.id}|" th:text="${image.likeCount}"></b> likes</span>
+					</div>
+					<div class="sl__item__contents__content">
+						<p th:text="${image.caption}"></p>
+					</div>
+
+					<div style="padding:7px 0px " th:id="|storyCommentList-${image.id}|">
+
+						<div th:each="comment : ${image.comments}" class="sl__item__contents__comment" th:id="|storyCommentItem-${comment.id}|">
+							<p>
+								<b th:text="${comment.user.username} ">  </b > <p th:text="${comment.content}"></p>
+							</p>
+
+							<button th:if="${#authentication.principal.user.id} == ${comment.user.id}" th:onclick="|deleteComment(${comment.id})|">
+							<i class="fas fa-times"></i>
+						</button>
+						</div>
+
+					</div>
+					<div class="sl__item__input">
+						<input type="text" placeholder="댓글 달기..." th:id="|storyCommentInput-${image.id}|" />
+						<button type="button" th:onClick="|addComment(${image.id})|">게시</button>
+					</div>
+				</div>
+			</div>
+
+<!--			===================-->
+		</div>
+		</div>
+	</div>
+
+</div>
+
 <footer th:replace="layout/footer.html :: fragment-footer"></footer>
 
 <script src="/js/profile.js"></script>
+<script src="/js/header.js"></script>
 

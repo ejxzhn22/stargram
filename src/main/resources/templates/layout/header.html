@@ -1,6 +1,7 @@
 
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/head.html :: fragment-head"></head>
 <body>
 <input type="hidden" id="principalId" th:value="${#authentication.principal.user.id}"/>
 
@@ -9,6 +10,13 @@
 		<a href="/" class="logo">
 			<img src="/images/logo.png" alt="">
 		</a>
+
+
+			<div class="search">
+				<input type="text" class="search-input" name="keyword" placeholder="친구를 검색하세요.">
+				<a th:onclick="|javascript:headerSubscribeInfoModalOpen();|" class="search-button">검색</a>
+			</div>
+
 <!--		<div sec:authentication="principal"></div>-->
 		<nav class="navi">
 			<ul class="navi-list">
@@ -18,10 +26,32 @@
 				<li class="navi-item"><a href="/image/popular">
 					<i class="far fa-compass"></i>
 				</a></li>
-				<li class="navi-item"><a th:href="|user/${#authentication.principal.user.id}|">
+				<li class="navi-item"><a th:href="|/user/${#authentication.principal.user.id}|">
 					<i class="far fa-user"></i>
 				</a></li>
 			</ul>
 		</nav>
 	</div>
+
+
+	<!-- 구독정보 모달 -->
+	<div class="modal-subscribe-header">
+		<div class="subscribe-header">
+			<div class="subscribe-header-header">
+				<span>검색 정보</span>
+				<button onclick="modalHeaderClose()">
+					<i class="fas fa-times"></i>
+				</button>
+			</div>
+
+			<div class="subscribe-header-list" id="subscribeHeaderModalList">
+
+			</div>
+		</div>
+	</div>
+
 </header>
+</body>
+
+
+

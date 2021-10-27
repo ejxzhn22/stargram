@@ -1,14 +1,18 @@
 package com.sujin.stargram.Service;
 
+import com.sujin.stargram.config.auth.PrincipalDetails;
+import com.sujin.stargram.domain.Likes;
 import com.sujin.stargram.domain.User;
 import com.sujin.stargram.dto.UserProfileDto;
 import com.sujin.stargram.handler.ex.CustomApiException;
 import com.sujin.stargram.handler.ex.CustomException;
 import com.sujin.stargram.handler.ex.CustomValidationApiException;
+import com.sujin.stargram.repository.LikesRepository;
 import com.sujin.stargram.repository.SubscribeRepository;
 import com.sujin.stargram.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +21,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import java.util.function.Supplier;
 
@@ -26,6 +32,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final SubscribeRepository subscribeRepository;
+    private final LikesRepository likesRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Value("${file.path}")
@@ -73,6 +80,21 @@ public class UserService {
 
         dto.setSubscribeState(subscribeState ==1);
         dto.setSubscribeCount(subscribeCount);
+
+        // 사진의 좋아요 갯수
+        userEntity.getImages().forEach((image)->{
+
+            image.setLikeCount((image.getLikes().size()));
+
+            List<Long> likeList = likesRepository.mImageLikes(image.getId());
+
+            for(long userId : likeList){
+                if(userId == principalId){
+                    image.setLikeState(true);
+                }
+            }
+
+        });
 
         return dto;
     }
@@ -122,5 +144,30 @@ public class UserService {
         return userEntity;
     }// 더티체킹 일어나서 업데이트가 완료됨.
 
+    //아이디 검색
+    @Transactional(readOnly = true)
+    public List<UserProfileDto> searchUsername(String keyword, long principalId){
+        List<User> userList = userRepository.findByUsernameContaining(keyword);
+        List<UserProfileDto> list = new ArrayList<>();
+
+        System.out.println("===========size: " + userList.size());
+
+        for(int i=0; i<userList.size(); i++){
+            UserProfileDto dto = new UserProfileDto();
+            dto.setUser(userList.get(i));
+            list.add(dto);
+        }
+
+        for(UserProfileDto dto : list){
+
+            int subscribeState = subscribeRepository.mSubscribeState(principalId, dto.getUser().getId());
+            dto.setSubscribeState(subscribeState ==1);
+        }
+
+        for(UserProfileDto dto : list){
+            System.out.println("---------------------"+dto.getUser().getUsername());
+        }
+        return list;
+    }
 
 }

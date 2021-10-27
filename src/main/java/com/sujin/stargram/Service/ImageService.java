@@ -38,9 +38,10 @@ public class ImageService {
 
                 int likeCount = image.getLikes().size();
                 image.setLikeCount(likeCount);
-
+                image.setLikeState(false);
                 if(like.getUser().getId() == principalId){ // 해당 이미지에 좋아요한 사람들을 찾아서 현재 로그인 사람이 좋아요 한 것인지 비교
                     image.setLikeState(true);
+                    System.out.println("========================="+image.getLikeState());
                 }
             });
         });
@@ -73,4 +74,5 @@ public class ImageService {
         Image imageEntity = imageRepository.save(image);
 
     }
+
 }

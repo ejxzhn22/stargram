@@ -1,11 +1,14 @@
 package com.sujin.stargram.controller.api;
 
+import com.sujin.stargram.Service.ImageService;
 import com.sujin.stargram.Service.SubscribeService;
 import com.sujin.stargram.Service.UserService;
 import com.sujin.stargram.config.auth.PrincipalDetails;
+import com.sujin.stargram.domain.Image;
 import com.sujin.stargram.domain.User;
 import com.sujin.stargram.dto.CMRespDto;
 import com.sujin.stargram.dto.SubscribeDto;
+import com.sujin.stargram.dto.UserProfileDto;
 import com.sujin.stargram.dto.UserUpdateDto;
 import com.sujin.stargram.handler.ex.CustomValidationApiException;
 import lombok.RequiredArgsConstructor;
@@ -14,10 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
@@ -31,6 +31,7 @@ public class UserApiController {
 
     private final UserService userService;
     private final SubscribeService subscribeService;
+    private final ImageService imageService;
 
     @PutMapping("/api/user/{principalId}/profileImageUrl")
     public ResponseEntity<?> profileImageUrlUpdate(@PathVariable long principalId, MultipartFile profileImageFile, @AuthenticationPrincipal PrincipalDetails principalDetails){
@@ -70,4 +71,14 @@ public class UserApiController {
 
 
     }
+
+    @GetMapping("/api/user/search/{keyword}")
+    public ResponseEntity<?> search(@PathVariable String keyword, @AuthenticationPrincipal PrincipalDetails principalDetails ){
+        List<UserProfileDto> userProfileDtos = userService.searchUsername(keyword, principalDetails.getUser().getId());
+
+        return new ResponseEntity<>(new CMRespDto<>(1,"아이디 검색 리스트 불러오기 성공", userProfileDtos), HttpStatus.OK);
+    }
+
+
+
 }

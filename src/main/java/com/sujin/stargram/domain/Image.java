@@ -1,10 +1,7 @@
 package com.sujin.stargram.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -15,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 @Entity
+@Getter
 public class Image {
 
     @Id
@@ -52,5 +50,10 @@ public class Image {
     @PrePersist
     public void createDate() {
         this.createDate = LocalDateTime.now();
+    }
+
+
+    public boolean getLikeState() {
+        return likeState;
     }
 }

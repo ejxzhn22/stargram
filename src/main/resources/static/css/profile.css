@@ -379,6 +379,156 @@
   align-items: center;
 }
 
+/*===============이미지 디테일*/
+.modal-imageDetail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.modal-imageDetail .imageDetail {
+  width: 750px;
+  height: 600px;
+  background-color: #fff;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.modal-imageDetail .imageDetail .imageDetail-header {
+  text-align: center;
+  line-height: 50px;
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+  position: relative;
+}
+.modal-imageDetail .imageDetail .imageDetail-header button {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  background-color: transparent;
+  border: 0;
+}
+.modal-simageDetail .imageDetail .imageDetail-header button i {
+  font-size: 20px;
+}
+.modal-imageDetail .imageDetail .imageDetail-list {
+  overflow: hidden;
+  overflow-y: auto;
+}
+.modal-imageDetail .imageDetail .imageDetail-list .imageDetail__item {
+  display: flex;
+  height: 70px;
+  padding: 10px;
+}
+.modal-imageDetail .imageDetail .imageDetail-list .imageDetail__item .imageDetail__img {
+  width: 80px;
+  text-align: center;
+}
+.modal-imageDetail .imageDetail .imageDetail-list .imageDetail__item .imageDetail__img {
+  width: 80px;
+  text-align: center;
+}
+.modal-imageDetail .imageDetail .imageDetail-list .imageDetail__item .imageDetail__img img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.modal-imageDetail .imageDetail .imageDetail-list .imageDetail__item .imageDetail__text {
+  padding-top: 5px;
+}
+.modal-imageDetail .imageDetail .imageDetail-list .imageDetail__item .imageDetail__text h2 {
+  font-size: 16px;
+  line-height: 50px;
+}
+.modal-imageDetail .imageDetail .imageDetail-list .imageDetail__item .imageDetail__btn {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+/*===============*/
+
+
+/*===============헤더 검색*/
+
+.modal-subscribe-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.modal-subscribe-header .subscribe-header {
+  width: 600px;
+  height: 500px;
+  background-color: #fff;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.modal-subscribe-header .subscribe-header .subscribe-header-header {
+  text-align: center;
+  line-height: 50px;
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+  position: relative;
+}
+.modal-subscribe-header .subscribe-header .subscribe-header-header button {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  background-color: transparent;
+  border: 0;
+}
+.modal-subscribe-header .subscribe-header .subscribe-header-header button i {
+  font-size: 20px;
+}
+.modal-subscribe-header .subscribe-header .subscribe-header-list {
+  overflow: hidden;
+  overflow-y: auto;
+}
+.modal-subscribe-header .subscribe-header .subscribe-header-list .subscribe-header__item {
+  display: flex;
+  height: 70px;
+  padding: 10px;
+}
+.modal-subscribe-header .subscribe-header .subscribe-header-list .subscribe-header__item .subscribe__img {
+  width: 80px;
+  text-align: center;
+}
+.modal-subscribe-header .subscribe-header .subscribe-header-list .subscribe-header__item .subscribe__img {
+  width: 80px;
+  text-align: center;
+}
+.modal-subscribe-header .subscribe-header .subscribe-header-list .subscribe-header__item .subscribe__img img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.modal-subscribe-header .subscribe-header .subscribe-header-list .subscribe-header__item .subscribe__text {
+  padding-top: 5px;
+}
+.modal-subscribe-header .subscribe-header .subscribe-header-list .subscribe-header__item .subscribe__text h2 {
+  font-size: 16px;
+  line-height: 50px;
+}
+.modal-subscribe-header .subscribe-header .subscribe-header-list .subscribe-header__item .subscribe__btn {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+/*===============*/
+
 .cta {
   margin-right: 10px;
   padding: 10px 10px;
