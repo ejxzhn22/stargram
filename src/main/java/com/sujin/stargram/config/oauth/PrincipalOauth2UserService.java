@@ -35,7 +35,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         System.out.println("userRequest : "+ userRequest.getClientRegistration()); //restrationId로 어떤 OAuth로 로그인 햇는지 알수 잇음
-        //System.out.println("userRequest : "+ userRequest.getAccessToken());
+        System.out.println("userRequest : "+ userRequest.getAccessToken());
 
         OAuth2User oAuth2User = super.loadUser(userRequest);
 
@@ -57,11 +57,18 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
             System.out.println("카카오 로그인 요청");
             oAuth2UserInfo = new KakaoUserInfo((Map)oAuth2User.getAttributes().get("kakao_account"));
             oAuth2UserInfo2 = new KakaoUserInfo((Map)oAuth2User.getAttributes().get("properties"));
+//            oAuth2UserInfo3 = new KakaoUserInfo((Map)oAuth2User.getAttributes().get("id"));
 
         }
 
         String provider = oAuth2UserInfo.getProvider(); // google
-        String providerId = oAuth2UserInfo.getProviderId();
+        String providerId;
+        if(userRequest.getClientRegistration().getRegistrationId().equals("kakao")){
+            providerId = Integer.toString((Integer) oAuth2User.getAttributes().get("id"));
+            System.out.println("?????????????????providerId = " + providerId);
+        }else{
+            providerId = oAuth2UserInfo.getProviderId();
+        }
         String username = provider+"_"+providerId; //google_(sub)
         String password = bCryptPasswordEncoder.encode("스타그램");
 
