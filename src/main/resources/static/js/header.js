@@ -41,6 +41,8 @@ function headerSubscribeInfoModalOpen() {
 	}).done(res=>{
 		console.log("성공", res.data);
 		res.data.forEach((u)=>{
+			console.log("u.user : ", u.user);
+			console.log("u : ", u);
 			let item = getHeaderSubscribeModalItem(u.user);
 			$("#subscribeHeaderModalList").append(item);
 			let item2 = getHeaderSubscribeModalItem2(u);
@@ -82,14 +84,14 @@ function getHeaderSubscribeModalItem2(u) {
 	let item = ``;
 	if(!u.equalUserState){ // 동일 유저가 아닐 때 버튼이 만들어 져야함
 		if(u.subscribeState){ // 구독 한 상태
-			item += `<button class="cta blue" onclick="toggleSubscribeHeader(${u.id},this)">구독취소</button>`;
+			item += `<button class="cta blue" onclick="toggleSubscribeHeader(${u.user.id},this)">구독취소</button>`;
 
 		}else{ // 구독 안 한 상태
-			item += `<button class="cta" onclick="toggleSubscribeHeader(${u.id},this)">구독하기</button>`;
+			item += `<button class="cta" onclick="toggleSubscribeHeader(${u.user.id},this)">구독하기</button>`;
 
 		}
 	}
-
+	console.log("item2: ",item);
 	return item;
 }
 
